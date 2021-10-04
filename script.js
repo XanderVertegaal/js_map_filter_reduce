@@ -116,3 +116,33 @@ const MarvelHeroes = superheroes.filter(x => x.publisher == "Marvel Comics")
 
 console.log('Combined weight of DC Comics heroes:', DCHeroes.map(x => parseInt(x.weight)).reduce((acc, weight) => {return acc + weight}, 0))
 console.log('Combined weight of Marvel Comics heroes:', MarvelHeroes.map(x => { if (Number.isInteger(parseInt(x.weight))) {return parseInt(x.weight); } else {return 0} }).reduce((acc, weight) => acc + weight, 0))
+
+// console.log('Heaviest superhero:', Math.max(superheroes.map(x => { if (Number.isInteger(parseInt(x.weight))) {return parseInt(x.weight); } else {return 0} })))
+
+
+let allWeights = superheroes.map(x => { if (Number.isInteger(parseInt(x.weight))) {return parseInt(x.weight); } else {return 0} })
+// const findHeaviest = function(array) {
+//     var heaviest = 0;
+//     for (weight of array) {
+//         if (weight > heaviest) {
+//             heaviest = weight
+//         }
+//     }
+//     return heaviest;
+// }
+// console.log(findHeaviest(allWeights))
+
+console.log('The heaviest superhero of all weighs:', allWeights.reduce((heaviest, current) => {
+        if (current > heaviest) {
+            return current
+        } else {
+            return heaviest
+        }
+}))
+console.log('His/her name is:', superheroes.filter(x => parseInt(x.weight) === allWeights.reduce((heaviest, current) => {
+    if (current > heaviest) {
+        return current
+    } else {
+        return heaviest
+    }
+})))
