@@ -108,14 +108,21 @@ const superheroes = [
 
 console.log('All superhero names:', superheroes.map(x => x.name))
 console.log('Light superheroes (< 190 pounds):', superheroes.filter(x => x.weight < 190))
-console.log('Two-hundred pound superheroes:', superheroes.filter(x => x.weight == 200).map(x => x.name))
+console.log('Two-hundred pound superheroes:', 
+    superheroes
+        .filter(x => x.weight == 200)
+        .map(x => x.name))
 console.log('First appearances:', superheroes.map(x => x.first_appearance))
 
-const DCHeroes = superheroes.filter(x => x.publisher == "DC Comics")
-const MarvelHeroes = superheroes.filter(x => x.publisher == "Marvel Comics")
+const DCHeroes = superheroes.filter(x => x.publisher === "DC Comics")
+const MarvelHeroes = superheroes.filter(x => x.publisher === "Marvel Comics")
 
 console.log('Combined weight of DC Comics heroes:', DCHeroes.map(x => parseInt(x.weight)).reduce((acc, weight) => {return acc + weight}, 0))
-console.log('Combined weight of Marvel Comics heroes:', MarvelHeroes.map(x => { if (Number.isInteger(parseInt(x.weight))) {return parseInt(x.weight); } else {return 0} }).reduce((acc, weight) => acc + weight, 0))
+console.log('Combined weight of Marvel Comics heroes:', 
+    MarvelHeroes
+        .map(x => x.weight !== 'unknown' ? parseInt(x.weight) : 0)
+        .reduce((acc, weight) => acc + weight, 0))
+
 
 // console.log('Heaviest superhero:', Math.max(superheroes.map(x => { if (Number.isInteger(parseInt(x.weight))) {return parseInt(x.weight); } else {return 0} })))
 
